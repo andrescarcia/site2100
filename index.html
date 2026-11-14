@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7efe9">
+<title>Feliz aniversario, amor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7efe9;
+    --paper:#fffaf6;
+    --ink:#3a2a2c;
+    --muted:#8a7275;
+    --rose:#c8576d;
+    --rose-soft:#f2d4d6;
+    --gold:#c9a36a;
+    --shadow:0 10px 30px rgba(90,40,50,.12);
+    --r:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:Inter,system-ui,-apple-system,sans-serif;
+    line-height:1.55;
+    overflow-x:hidden;
+    -webkit-tap-highlight-color:transparent;
+  }
+  main{max-width:480px;margin:0 auto;padding:0 16px calc(40px + env(safe-area-inset-bottom))}
+  .serif{font-family:Fraunces,Georgia,serif}
+  .hand{font-family:Caveat,cursive}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    margin:0 -16px;
+    padding:0 24px calc(48px + env(safe-area-inset-bottom));
+    color:#fff;
+    overflow:hidden;
+  }
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;z-index:-2;transform:scale(1.05);animation:zoom 14s ease-out forwards}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(40,15,20,.05) 30%,rgba(40,15,20,.75) 100%)}
+  @keyframes zoom{to{transform:scale(1)}}
+  .hero .eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;opacity:.9}
+  .hero h1{font-family:Fraunces,serif;font-weight:400;font-size:clamp(56px,18vw,84px);line-height:.95;margin:10px 0 6px}
+  .hero h1 em{font-style:italic;color:#ffd9de}
+  .hero p{font-size:17px;opacity:.95}
+  .scroll-hint{margin-top:28px;display:flex;align-items:center;gap:8px;font-size:13px;opacity:.85}
+  .scroll-hint span{display:inline-block;animation:bob 1.6s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(5px)}}
+
+  section{padding:56px 0 8px}
+  .label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);font-weight:600;text-align:center}
+  h2{font-family:Fraunces,serif;font-weight:400;font-size:34px;line-height:1.1;text-align:center;margin:8px 0 24px}
+  h2 em{color:var(--rose)}
+
+  /* ---------- Counter ---------- */
+  .counter{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .tile{background:var(--paper);border-radius:var(--r);padding:18px 8px;text-align:center;box-shadow:var(--shadow)}
+  .tile b{display:block;font-family:Fraunces,serif;font-weight:600;font-size:38px;line-height:1;color:var(--rose)}
+  .tile small{font-size:13px;color:var(--muted)}
+  .live{margin-top:14px;text-align:center;font-size:14px;color:var(--muted)}
+  .live strong{color:var(--ink);font-variant-numeric:tabular-nums;font-weight:600}
+
+  /* ---------- Gallery ---------- */
+  .gallery{
+    display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -16px;padding:8px 16px 28px;scrollbar-width:none;
+  }
+  .gallery::-webkit-scrollbar{display:none}
+  .polaroid{
+    flex:0 0 78%;scroll-snap-align:center;
+    background:#fff;padding:10px 10px 14px;border-radius:6px;box-shadow:var(--shadow);
+    transform:rotate(var(--rot,0deg));
+  }
+  .polaroid img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:3px;display:block;background:var(--rose-soft)}
+  .polaroid figcaption{font-family:Caveat,cursive;font-size:24px;text-align:center;margin-top:8px;color:var(--ink)}
+  .dots{display:flex;justify-content:center;gap:6px;margin-top:-12px}
+  .dots i{width:6px;height:6px;border-radius:50%;background:var(--rose-soft);transition:.3s}
+  .dots i.on{background:var(--rose);width:18px;border-radius:4px}
+
+  /* ---------- Letter ---------- */
+  .letter{
+    background:var(--paper);border-radius:var(--r);padding:28px 22px;box-shadow:var(--shadow);
+    font-family:Fraunces,serif;font-size:18px;line-height:1.65;position:relative;
+  }
+  .letter p+p{margin-top:14px}
+  .letter .sign{font-family:Caveat,cursive;font-size:30px;color:var(--rose);text-align:right;margin-top:18px}
+
+  /* ---------- Coupon ---------- */
+  .coupon-wrap{position:relative}
+  .coupon{
+    position:relative;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:4/3;user-select:none;-webkit-user-select:none;
+  }
+  .coupon-content{
+    position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 15% 20%,#ffe3e6 0,transparent 45%),
+      radial-gradient(circle at 85% 85%,#fde9d3 0,transparent 50%),
+      var(--paper);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;
+    border:2px dashed var(--rose-soft);border-radius:var(--r);
+  }
+  .coupon-content .tag{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--rose);font-weight:600}
+  .coupon-content h3{font-family:Fraunces,serif;font-weight:600;font-size:30px;line-height:1.1;margin:8px 0}
+  .coupon-content p{color:var(--muted);font-size:15px}
+  .coupon-content .code{margin-top:14px;font-family:ui-monospace,Menlo,monospace;font-size:13px;letter-spacing:.15em;background:var(--rose-soft);color:var(--ink);padding:6px 12px;border-radius:999px}
+  .coupon-content .emoji{font-size:40px;line-height:1}
+  #scratch{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab;transition:opacity .8s ease}
+  #scratch.done{opacity:0;pointer-events:none}
+  .hint{text-align:center;color:var(--muted);font-size:14px;margin-top:14px}
+
+  footer{text-align:center;padding:56px 0 8px;color:var(--muted);font-size:14px}
+  footer .big{font-family:Caveat,cursive;font-size:34px;color:var(--rose)}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  /* floating hearts */
+  .heart{position:fixed;bottom:-30px;pointer-events:none;z-index:50;animation:float linear forwards;color:var(--rose)}
+  @keyframes float{to{transform:translateY(-110vh) rotate(25deg);opacity:0}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- HERO -->
+  <header class="hero">
+    <img src="img/foto7.jpg" alt="Nosotros abrazados">
+    <div class="eyebrow">Feliz aniversario, amorcito</div>
+    <h1><span id="heroDays">2100</span><br><em>días</em></h1>
+    <p>contigo, y quiero todos los que vienen.</p>
+    <div class="scroll-hint"><span>↓</span> desliza</div>
+  </header>
+
+  <!-- COUNTER -->
+  <section class="reveal">
+    <div class="label">Nuestro tiempo</div>
+    <h2>Juntos desde el<br><em>13 de febrero de 2021</em></h2>
+    <div class="counter">
+      <div class="tile"><b id="y">5</b><small>años</small></div>
+      <div class="tile"><b id="m">9</b><small>meses</small></div>
+      <div class="tile"><b id="d">0</b><small>días</small></div>
+    </div>
+    <p class="live">y contando: <strong id="clock">--:--:--</strong></p>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="reveal">
+    <div class="label">Momentos</div>
+    <h2>Un poquito de <em>nosotros</em></h2>
+    <div class="gallery" id="gallery">
+      <figure class="polaroid" style="--rot:-1.5deg"><img src="img/foto2.jpg" alt="" loading="lazy"><figcaption>Diciembre 2021</figcaption></figure>
+      <figure class="polaroid" style="--rot:1deg"><img src="img/foto1.jpg" alt="" loading="lazy"><figcaption>Sol, arena y tú</figcaption></figure>
+      <figure class="polaroid" style="--rot:-1deg"><img src="img/foto3.jpg" alt="" loading="lazy"><figcaption>Nuestro mar azul</figcaption></figure>
+      <figure class="polaroid" style="--rot:1.5deg"><img src="img/foto4.jpg" alt="" loading="lazy"><figcaption>Tus risas favoritas</figcaption></figure>
+      <figure class="polaroid" style="--rot:-1.5deg"><img src="img/foto6.jpg" alt="" loading="lazy"><figcaption>Besitos en las alturas</figcaption></figure>
+      <figure class="polaroid" style="--rot:1deg"><img src="img/foto5.jpg" alt="" loading="lazy"><figcaption>Tan orgulloso de ti</figcaption></figure>
+      <figure class="polaroid" style="--rot:-1deg"><img src="img/foto7.jpg" alt="" loading="lazy"><figcaption>Mi lugar favorito</figcaption></figure>
+    </div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- LETTER -->
+  <section class="reveal">
+    <div class="label">Para ti</div>
+    <h2>Una cartita</h2>
+    <div class="letter">
+      <p>Amor, hoy cumplimos <span class="daysText">2100</span> días juntos. Cinco años y nueve meses de risas, viajes, abrazos y de aprender a querernos cada día un poquito mejor.</p>
+      <p>Gracias por ser mi casa, mi compañera y mi persona favorita. Contigo todo es más bonito, hasta los días normales.</p>
+      <p>Te amo hoy, y te voy a amar en todos los días que nos faltan por contar.</p>
+      <div class="sign">— tu amorcito ♥</div>
+    </div>
+  </section>
+
+  <!-- COUPON -->
+  <section class="reveal">
+    <div class="label">Un regalito</div>
+    <h2>Rasca y <em>descubre</em></h2>
+    <div class="coupon-wrap">
+      <div class="coupon" id="coupon">
+        <div class="coupon-content">
+          <div class="emoji">🧴✨</div>
+          <div class="tag">Cupón válido por</div>
+          <h3>Una compra de<br>skin care</h3>
+          <p>(que te lo debia desde hace tiempo, condiciones aplican)</p>
+          <div class="code">AMOR-2100</div>
+        </div>
+        <canvas id="scratch" aria-label="Rasca con el dedo para revelar el cupón"></canvas>
+      </div>
+    </div>
+    <p class="hint" id="hint">Rasca con tu dedo 👆</p>
+  </section>
+
+  <footer>
+    <div class="big">Te amo</div>
+    <p>por estos <span class="daysText">2100</span> días y por todos los que vienen</p>
+  </footer>
+</main>
+
+<script>
+/* ===== Fecha de inicio (año, mes-1, día) ===== */
+const START = new Date(2021, 1, 13);
+
+function diffYMD(a, b){
+  let y = b.getFullYear()-a.getFullYear();
+  let m = b.getMonth()-a.getMonth();
+  let d = b.getDate()-a.getDate();
+  if(d<0){ m--; d += new Date(b.getFullYear(), b.getMonth(), 0).getDate(); }
+  if(m<0){ y--; m += 12; }
+  return {y,m,d};
+}
+function tick(){
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const days = Math.round((today - START)/864e5);
+  const {y,m,d} = diffYMD(START, today);
+  document.getElementById('heroDays').textContent = days.toLocaleString('es');
+  document.querySelectorAll('.daysText').forEach(e=>e.textContent = days.toLocaleString('es'));
+  document.getElementById('y').textContent = y;
+  document.getElementById('m').textContent = m;
+  document.getElementById('d').textContent = d;
+  document.getElementById('y').nextElementSibling.textContent = y===1?'año':'años';
+  document.getElementById('m').nextElementSibling.textContent = m===1?'mes':'meses';
+  document.getElementById('d').nextElementSibling.textContent = d===1?'día':'días';
+  const pad = n=>String(n).padStart(2,'0');
+  document.getElementById('clock').textContent =
+    `${days.toLocaleString('es')} días, ${pad(now.getHours())}h ${pad(now.getMinutes())}m ${pad(now.getSeconds())}s`;
+}
+tick(); setInterval(tick, 1000);
+
+/* ===== Reveal on scroll ===== */
+const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ===== Gallery dots ===== */
+const gal = document.getElementById('gallery'), dots = document.getElementById('dots');
+const cards = [...gal.children];
+cards.forEach(()=>dots.appendChild(document.createElement('i')));
+function updateDots(){
+  const c = gal.scrollLeft + gal.clientWidth/2;
+  let best=0, dist=Infinity;
+  cards.forEach((k,i)=>{ const kc = k.offsetLeft + k.offsetWidth/2; const dd=Math.abs(kc-c); if(dd<dist){dist=dd;best=i;} });
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on', i===best));
+}
+gal.addEventListener('scroll', ()=>requestAnimationFrame(updateDots), {passive:true});
+updateDots();
+
+/* ===== Hearts ===== */
+function hearts(n){
+  for(let i=0;i<n;i++){
+    const h=document.createElement('div'); h.className='heart'; h.textContent=['♥','❤','💕','✨'][i%4];
+    h.style.left=Math.random()*100+'vw';
+    h.style.fontSize=(14+Math.random()*22)+'px';
+    h.style.animationDuration=(3+Math.random()*3)+'s';
+    h.style.animationDelay=(Math.random()*1.2)+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 8000);
+  }
+}
+setTimeout(()=>hearts(14), 600);
+
+/* ===== Scratch card ===== */
+(function(){
+  const cv = document.getElementById('scratch'), ctx = cv.getContext('2d');
+  const hint = document.getElementById('hint');
+  let done=false, drawing=false, last=null, moves=0;
+
+  function paint(){
+    const r = cv.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio||1, 2);
+    cv.width = r.width*dpr; cv.height = r.height*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const g = ctx.createLinearGradient(0,0,r.width,r.height);
+    g.addColorStop(0,'#d9a7ae'); g.addColorStop(.5,'#f3d6d3'); g.addColorStop(1,'#c98f99');
+    ctx.globalCompositeOperation='source-over';
+    ctx.fillStyle=g; ctx.fillRect(0,0,r.width,r.height);
+    // sparkle texture
+    for(let i=0;i<260;i++){
+      ctx.fillStyle=`rgba(255,255,255,${Math.random()*.35})`;
+      ctx.fillRect(Math.random()*r.width, Math.random()*r.height, 1.5, 1.5);
+    }
+    ctx.fillStyle='rgba(255,255,255,.95)';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.font='600 26px Fraunces, Georgia, serif';
+    ctx.fillText('Rasca aquí', r.width/2, r.height/2-10);
+    ctx.font='500 15px Inter, sans-serif';
+    ctx.fillText('♥ hay una sorpresa para ti ♥', r.width/2, r.height/2+22);
+  }
+  function pos(e){ const r=cv.getBoundingClientRect(); return {x:e.clientX-r.left, y:e.clientY-r.top}; }
+  function scratch(p){
+    ctx.globalCompositeOperation='destination-out';
+    ctx.lineWidth=44; ctx.lineCap='round'; ctx.lineJoin='round';
+    ctx.beginPath();
+    ctx.moveTo((last||p).x,(last||p).y); ctx.lineTo(p.x,p.y); ctx.stroke();
+    last=p;
+    if(++moves%12===0) check();
+  }
+  function check(){
+    const {width:w,height:h} = cv;
+    const data = ctx.getImageData(0,0,w,h).data;
+    let clear=0, total=0;
+    for(let i=3;i<data.length;i+=4*40){ total++; if(data[i]<40) clear++; }
+    if(clear/total > .55) reveal();
+  }
+  function reveal(){
+    if(done) return; done=true;
+    cv.classList.add('done');
+    hint.textContent='¡Feliz aniversario, amor! 💖 Haz captura y canjéalo ... o no ehehe';
+    hearts(30);
+    if(navigator.vibrate) navigator.vibrate([30,40,30]);
+  }
+  cv.addEventListener('pointerdown',e=>{ if(done) return; drawing=true; last=null; cv.setPointerCapture(e.pointerId); scratch(pos(e)); });
+  cv.addEventListener('pointermove',e=>{ if(drawing) scratch(pos(e)); });
+  ['pointerup','pointercancel','pointerleave'].forEach(t=>cv.addEventListener(t,()=>{ if(drawing){drawing=false; check();} }));
+
+  // paint after fonts load so the text uses the right font
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(paint);
+  let rw = cv.getBoundingClientRect().width;
+  window.addEventListener('resize',()=>{ const w=cv.getBoundingClientRect().width; if(!done && Math.abs(w-rw)>2){ rw=w; paint(); } });
+})();
+</script>
+</body>
+</html>
